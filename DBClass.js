@@ -103,7 +103,6 @@ const charters = [
   9,
   0,
 ];
-const numbers = [];
 function createRandomSequence() {
   let randomString = "";
   for (let i = 0; i < 5; i++) {
