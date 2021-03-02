@@ -1,16 +1,10 @@
 {
-    "urlArray": [
-        {
-            "date": "2021-03-02 15:57:34",
-            "originalUrl": "https://www.google.co.il/",
-            "shortUrlId": "3p5ek",
-            "redirects": 0
-        },
-        {
-            "date": "2021-03-02 16:43:11",
-            "originalUrl": "https://www.google.co.il/",
-            "shortUrlId": "fm4i7",
-            "redirects": 0
-        }
-    ]
+  "urlArray": [
+    {
+      "date": "2021-03-02 15:57:34",
+      "originalUrl": "https://www.google.co.il/",
+      "shortUrlId": "3p5ek",
+      "redirects": 0
+    }
+  ]
 }

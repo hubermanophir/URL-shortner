@@ -11,6 +11,11 @@ class DataBase {
     });
   }
   createNewUrl(originalUrl) {
+    for (const item of this.urlObject.urlArray) {
+      if (item.originalUrl === originalUrl) {
+        return item;
+      }
+    }
     const url = {};
     url.date = createDate();
     url.originalUrl = originalUrl;
@@ -26,6 +31,7 @@ class DataBase {
         }
       }
     );
+    return url;
   }
   getUrls() {
     return this.urlObject;
