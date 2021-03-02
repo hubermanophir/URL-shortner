@@ -36,6 +36,19 @@ class DataBase {
   getUrls() {
     return this.urlObject;
   }
+  updateRedirects(shortUrlId) {
+    const index = this.urlObject.urlArray.indexOf(shortUrlId);
+    this.urlObject.urlArray[index].redirects++;
+    fs.writeFile(
+      "./data/urlJson.json",
+      JSON.stringify(this.urlObject, null, 4),
+      (err) => {
+        if (err) {
+          throw new Error(err);
+        }
+      }
+    );
+  }
 }
 
 function createDate() {
