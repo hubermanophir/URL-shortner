@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const api = require("./routes");
 app.use("/api", api);
+app.use(express.json());
 
 app.use(cors());
 app.use("/public", express.static(`./public`));
