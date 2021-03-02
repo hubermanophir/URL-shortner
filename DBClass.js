@@ -37,8 +37,10 @@ class DataBase {
     return this.urlObject;
   }
   updateRedirects(shortUrlId) {
-    const index = this.urlObject.urlArray.indexOf(shortUrlId);
-    this.urlObject.urlArray[index].redirects++;
+    const index = this.urlObject.urlArray.findIndex((url) => {
+      return url.shortUrlId === shortUrlId;
+    });
+    this.urlObject.urlArray[index].redirects += 1;
     fs.writeFile(
       "./data/urlJson.json",
       JSON.stringify(this.urlObject, null, 4),
