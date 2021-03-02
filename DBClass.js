@@ -55,7 +55,8 @@ class DataBase {
     const url = this.urlObject.urlArray.filter((url) => {
       return url.shortUrlId === shortUrlId;
     });
-    return url.originalUrl;
+    // console.log(url[0].originalUrl);
+    return url[0].originalUrl;
   }
 }
 

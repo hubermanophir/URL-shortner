@@ -9,7 +9,9 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  res.redirect;
+  const originalUrl = dataBase.getOriginalUrl(id);
+  console.log(originalUrl);
+  res.redirect(originalUrl);
 });
 
 router.post("/", (req, res) => {
