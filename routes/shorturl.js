@@ -15,7 +15,6 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  dataBase.createNewUrl("https://www.goolge.co.il/");
   res.send("success");
 });
 
