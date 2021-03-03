@@ -27,7 +27,7 @@ class DataBase {
       JSON.stringify(this.urlObject, null, 4),
       (err) => {
         if (err) {
-          throw new Error(err);
+          throw new Error("Cant find file:" + err);
         }
       }
     );

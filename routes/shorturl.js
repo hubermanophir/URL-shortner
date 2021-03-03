@@ -9,13 +9,14 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  const originalUrl = dataBase.getOriginalUrl(id);
-  dataBase.updateRedirects(id);
-  res.redirect(originalUrl);
-});
-
-router.post("/", (req, res) => {
-  res.send("success");
+  try {
+    const originalUrl = dataBase.getOriginalUrl(id);
+    dataBase.updateRedirects(id);
+    res.status(302).redirect(originalUrl);
+  } catch (err) {
+    res.status(400);
+    throw new Error(err.message);
+  }
 });
 
 router.post("/new", (req, res) => {
@@ -24,10 +25,10 @@ router.post("/new", (req, res) => {
     dataBase.createNewUrl(userUrl);
     const shortUrl = dataBase.getShortUrl(userUrl);
     const messageObj = { original_url: userUrl, short_url: shortUrl };
-    return res.json(messageObj);
+    return res.status(200).json(messageObj);
   } else if (!validator.isURL(userUrl)) {
     const messageObj = { error: "Invalid Url" };
-    return res.json(messageObj);
+    return res.status(400).json(messageObj);
   }
 });
 
