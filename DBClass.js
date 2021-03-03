@@ -1,8 +1,14 @@
 const fs = require("fs");
+let path;
+if (process.env.NODE_ENV === "test") {
+  path = "test";
+} else {
+  path = "urlJson";
+}
 
 class DataBase {
   constructor() {
-    fs.readFile("./data/urlJson.json", (err, data) => {
+    fs.readFile(`./data/${path}.json`, (err, data) => {
       if (err) {
         throw new Error(err);
       } else {
@@ -23,7 +29,7 @@ class DataBase {
     url.redirects = 0;
     this.urlObject.urlArray.push(url);
     fs.writeFile(
-      "./data/urlJson.json",
+      `./data/${path}.json`,
       JSON.stringify(this.urlObject, null, 4),
       (err) => {
         if (err) {
@@ -42,7 +48,7 @@ class DataBase {
     });
     this.urlObject.urlArray[index].redirects += 1;
     fs.writeFile(
-      "./data/urlJson.json",
+      `./data/${path}.json`,
       JSON.stringify(this.urlObject, null, 4),
       (err) => {
         if (err) {
