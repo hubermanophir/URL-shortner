@@ -18,4 +18,10 @@ router.post("/", (req, res) => {
   res.send("success");
 });
 
+router.post("/new", (req, res) => {
+  const postBody = req.body;
+  console.log(postBody);
+  res.json(postBody.url);
+});
+
 module.exports = router;
