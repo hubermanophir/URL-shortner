@@ -57,6 +57,12 @@ class DataBase {
     });
     return url[0].originalUrl;
   }
+  getShortUrl(originalUrl) {
+    const url = this.urlObject.urlArray.filter((url) => {
+      return url.originalUrl === originalUrl;
+    });
+    return url[0].shortUrlId;
+  }
 }
 
 function createDate() {

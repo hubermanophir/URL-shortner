@@ -1,4 +1,5 @@
 const express = require("express");
+const validator = require("validator");
 const router = express.Router();
 const dataBase = require("../DBClass");
 
@@ -18,9 +19,16 @@ router.post("/", (req, res) => {
 });
 
 router.post("/new", (req, res) => {
-  const postBody = req.body;
-  console.log(postBody);
-  res.json(postBody.url);
+  const userUrl = req.body.url;
+  if (validator.isURL(userUrl)) {
+    dataBase.createNewUrl(userUrl);
+    const shortUrl = dataBase.getShortUrl(userUrl);
+    const messageObj = { original_url: userUrl, short_url: shortUrl };
+    return res.json(messageObj);
+  } else if (!validator.isURL(userUrl)) {
+    const messageObj = { error: "Invalid Url" };
+    return res.json(messageObj);
+  }
 });
 
 module.exports = router;
