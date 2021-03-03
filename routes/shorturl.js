@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const dataBase = require("../DBClass");
+const array = require("../views/script");
 
 router.get("/", (req, res) => {
-  // dataBase.updateRedirects("3p5ek");
   res.json(dataBase.getUrls());
 });
 
