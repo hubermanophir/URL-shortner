@@ -4,7 +4,7 @@ const router = express.Router();
 const dataBase = require("../DBClass");
 
 router.get("/", (req, res) => {
-  res.json(dataBase.getUrls());
+  res.status(200).json(dataBase.getUrls());
 });
 
 router.get("/:id", (req, res) => {
@@ -20,6 +20,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/new", (req, res) => {
+  // console.log(req.body.url);
   const userUrl = req.body.url;
   if (validator.isURL(userUrl)) {
     dataBase.createNewUrl(userUrl);

@@ -8,13 +8,15 @@ if (process.env.NODE_ENV === "test") {
 
 class DataBase {
   constructor() {
-    fs.readFile(`./data/${path}.json`, (err, data) => {
-      if (err) {
-        throw new Error(err);
-      } else {
-        this.urlObject = JSON.parse(data);
-      }
-    });
+    const data = fs.readFileSync(`./data/${path}.json`);
+    this.urlObject = JSON.parse(data);
+    // fs.readFile(`./data/${path}.json`, (err, data) => {
+    //   if (err) {
+    //     throw new Error(err);
+    //   }
+    //   this.urlObject = JSON.parse(data);
+    //   console.log(this.urlObject);
+    // });
   }
   createNewUrl(originalUrl) {
     for (const item of this.urlObject.urlArray) {

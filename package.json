@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --verbose",
-    "serverTest": "jest serverTest.test.js --verbose",
+    "serverTest": "jest serverTest.test.js --verbose --detectOpenHandles",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
