@@ -20,17 +20,23 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/new", (req, res) => {
-  // console.log(req.body.url);
   const userUrl = req.body.url;
-  if (validator.isURL(userUrl)) {
+  if (validator.isURL(userUrl) && includeHttp(userUrl)) {
     dataBase.createNewUrl(userUrl);
     const shortUrl = dataBase.getShortUrl(userUrl);
     const messageObj = { original_url: userUrl, short_url: shortUrl };
     return res.status(200).json(messageObj);
-  } else if (!validator.isURL(userUrl)) {
+  } else {
     const messageObj = { error: "Invalid Url" };
     return res.status(400).json(messageObj);
   }
 });
+
+function includeHttp(string) {
+  if (/(http(s?)):\/\//i.test(string)) {
+    return true;
+  }
+  return false;
+}
 
 module.exports = router;
