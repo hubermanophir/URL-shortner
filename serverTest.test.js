@@ -23,7 +23,7 @@ afterAll(() => {
   );
 });
 
-describe("check post route to /api/shorturl/new", () => {
+describe("check post route to /api/shorturl/", () => {
   it("should return original url and short url", async () => {
     const response = await request(app)
       .post("/api/shorturl/")
@@ -65,5 +65,19 @@ describe("testing GET route shorted url's ", () => {
     const response = await request(app).get(`/api/shorturl/1`);
     expect(response.status).toBe(400);
     expect(response.redirect).toBeFalsy;
+  });
+});
+
+describe("testing GET route statistic", () => {
+  it("should return the statistics of a specific url with date, shorturl, originalurl,redirects", async () => {
+    const shortUrl = database.getShortUrl(
+      "https://www.youtube.com/feed/subscriptions"
+    );
+    const response = await request(app).get(`/api/statistic/${shortUrl}`);
+    expect(response.status).toBe(200);
+    expect(response.body.date).toBeDefined;
+    expect(response.body.originalUrl).toBeDefined;
+    expect(response.body.shortUrlId).toBeDefined;
+    expect(response.body.shortUrlId).toBeDefined;
   });
 });
