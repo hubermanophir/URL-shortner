@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 const request = require("supertest");
 const app = require("./app");
 const database = require("./DBClass");
@@ -80,7 +79,7 @@ describe("testing GET route statistic", () => {
     expect(response.body.shortUrlId).toBeDefined;
     expect(response.body.shortUrlId).toBeDefined;
   });
-  it("should return status 400", async () => {
+  it("should return status 400 for invalid short url", async () => {
     const response = await request(app).get(`/api/statistic/1`);
     expect(response.status).toBe(400);
   });

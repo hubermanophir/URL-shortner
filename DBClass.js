@@ -1,7 +1,5 @@
-const { rejects } = require("assert");
 const fs = require("fs");
 
-const { resolve } = require("path");
 let path;
 if (process.env.NODE_ENV === "test") {
   path = "test";
