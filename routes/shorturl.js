@@ -2,6 +2,7 @@ const express = require("express");
 const validator = require("validator");
 const router = express.Router();
 const dataBase = require("../DBClass");
+const fetch = require("node-fetch");
 
 router.get("/", (req, res) => {
   res.status(200).json(dataBase.getUrls());
@@ -37,6 +38,19 @@ function includeHttp(string) {
     return true;
   }
   return false;
+}
+
+async function canFetch(string) {
+  return await fetch(string)
+    .then((res) => res.status)
+    .then((status) => {
+      if (status === 200) {
+        return true;
+      }
+    })
+    .catch((error) => {
+      return false;
+    });
 }
 
 module.exports = router;

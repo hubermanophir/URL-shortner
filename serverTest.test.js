@@ -58,7 +58,10 @@ describe("testing GET route shorted url's ", () => {
     const response = await request(app).get(`/api/shorturl/${shortUrl}`);
     expect(response.status).toBe(302);
     expect(response.redirect).toBeTruthy;
-    const redirects = database.getUrls().urlArray[0].redirects;
+    // const redirects = database.getUrls().urlArray[0].redirects;
+    const redirects = database.getRedirects(
+      "https://www.youtube.com/feed/subscriptions"
+    );
     expect(redirects).toBe(1);
   });
   it("should return status 400 and not redirect", async () => {

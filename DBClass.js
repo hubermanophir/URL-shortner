@@ -1,5 +1,6 @@
 const { rejects } = require("assert");
 const fs = require("fs");
+
 const { resolve } = require("path");
 let path;
 if (process.env.NODE_ENV === "test") {
@@ -12,22 +13,6 @@ class DataBase {
   constructor() {
     const data = fs.readFileSync(`./data/${path}.json`);
     this.urlObject = JSON.parse(data);
-    // return new Promise((resolve, reject) => {
-    //   fs.readFile(`./data/${path}.json`, (err, data) => {
-    //     if (err) {
-    //       reject(err);
-    //     } else {
-    //       resolve((this.urlObject = JSON.parse(data)));
-    //     }
-    //   });
-    // });
-    // fs.readFile(`./data/${path}.json`, (err, data) => {
-    //   if (err) {
-    //     throw new Error(err);
-    //   }
-    //   this.urlObject = JSON.parse(data);
-    //   console.log(this.urlObject);
-    // });
   }
   createNewUrl(originalUrl) {
     for (const item of this.urlObject.urlArray) {
@@ -81,6 +66,18 @@ class DataBase {
       return url.originalUrl === originalUrl;
     });
     return url[0].shortUrlId;
+  }
+  getRedirects(originalUrl) {
+    const url = this.urlObject.urlArray.filter((url) => {
+      return url.originalUrl === originalUrl;
+    });
+    return url[0].redirects;
+  }
+  getDate(originalUrl) {
+    const url = this.urlObject.urlArray.filter((url) => {
+      return url.originalUrl === originalUrl;
+    });
+    return url[0].date;
   }
 }
 
