@@ -33,8 +33,12 @@ describe("check post route to /api/shorturl/new", () => {
     expect(response.body["original_url"]).toBe(
       "https://www.youtube.com/feed/subscriptions"
     );
-    // console.log(response.body);
     expect(response.body["short_url"]).toBeDefined;
+  });
+  it("should be saved in the database", async () => {
+    const data = fs.readFileSync(`./data/test.json`);
+    const url = JSON.parse(data).urlArray[0].originalUrl;
+    expect(url).toBe("https://www.youtube.com/feed/subscriptions");
   });
   it("should return an error for invalid url", async () => {
     const response = await request(app)
@@ -43,5 +47,21 @@ describe("check post route to /api/shorturl/new", () => {
       .send({ url: "//www.youtube.com/feed/subscriptions" });
     expect(response.status).toBe(400);
     expect(response.body.error).toBe("Invalid Url");
+  });
+});
+
+describe("testing GET route shorted url's ", () => {
+  it("should return 302 status and redirect", async () => {
+    const shortUrl = database.getShortUrl(
+      "https://www.youtube.com/feed/subscriptions"
+    );
+    const response = await request(app).get(`/api/shorturl/${shortUrl}`);
+    expect(response.status).toBe(302);
+    expect(response.redirect).toBeTruthy;
+  });
+  it("should return status 400 and not redirect", async () => {
+    const response = await request(app).get(`/api/shorturl/1`);
+    expect(response.status).toBe(400);
+    expect(response.redirect).toBeFalsy;
   });
 });

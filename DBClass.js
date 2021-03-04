@@ -1,4 +1,6 @@
+const { rejects } = require("assert");
 const fs = require("fs");
+const { resolve } = require("path");
 let path;
 if (process.env.NODE_ENV === "test") {
   path = "test";
@@ -10,6 +12,15 @@ class DataBase {
   constructor() {
     const data = fs.readFileSync(`./data/${path}.json`);
     this.urlObject = JSON.parse(data);
+    // return new Promise((resolve, reject) => {
+    //   fs.readFile(`./data/${path}.json`, (err, data) => {
+    //     if (err) {
+    //       reject(err);
+    //     } else {
+    //       resolve((this.urlObject = JSON.parse(data)));
+    //     }
+    //   });
+    // });
     // fs.readFile(`./data/${path}.json`, (err, data) => {
     //   if (err) {
     //     throw new Error(err);
