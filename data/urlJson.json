@@ -1,22 +1,16 @@
 {
-  "urlArray": [
-    {
-      "date": "2021-03-02 15:57:34",
-      "originalUrl": "https://www.google.co.il/",
-      "shortUrlId": "3p5ek",
-      "redirects": 12
-    },
-    {
-      "date": "2021-03-04 13:17:29",
-      "originalUrl": "https://www.wilguitars.co.il/",
-      "shortUrlId": "me42a",
-      "redirects": 0
-    },
-    {
-      "date": "2021-03-04 13:38:55",
-      "originalUrl": "https://www.wildguitars.co.il/",
-      "shortUrlId": "a6l08",
-      "redirects": 0
-    }
-  ]
+    "urlArray": [
+        {
+            "date": "2021-03-02 15:57:34",
+            "originalUrl": "https://www.google.co.il/",
+            "shortUrlId": "3p5ek",
+            "redirects": 12
+        },
+        {
+            "date": "2021-03-04 15:56:05",
+            "originalUrl": "https://www.wildguitars.co.il/",
+            "shortUrlId": "9edc3",
+            "redirects": 0
+        }
+    ]
 }

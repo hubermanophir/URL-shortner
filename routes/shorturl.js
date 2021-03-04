@@ -4,10 +4,6 @@ const router = express.Router();
 const dataBase = require("../DBClass");
 const fetch = require("node-fetch");
 
-router.get("/", (req, res) => {
-  res.status(200).json(dataBase.getUrls());
-});
-
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   try {
@@ -20,16 +16,18 @@ router.get("/:id", (req, res) => {
   }
 });
 
-router.post("/new", (req, res) => {
-  const userUrl = req.body.url;
-  if (validator.isURL(userUrl) && includeHttp(userUrl)) {
+router.post("/", async (req, res) => {
+  const userUrl = req.headers.url;
+  const isRealUrl = await isUrlReal(userUrl);
+  if (validator.isURL(userUrl) && includeHttp(userUrl) && isRealUrl) {
     dataBase.createNewUrl(userUrl);
     const shortUrl = dataBase.getShortUrl(userUrl);
-    const messageObj = { original_url: userUrl, short_url: shortUrl };
-    return res.status(200).json(messageObj);
-  } else {
-    const messageObj = { error: "Invalid Url" };
-    return res.status(400).json(messageObj);
+    return res.status(200).json(shortUrl);
+  } else if (!includeHttp(userUrl)) {
+    res.status(400).json({ error: "invalid url" });
+  }
+  {
+    res.status(400).json({ error: "invalid hostname" });
   }
 });
 
@@ -39,16 +37,14 @@ function includeHttp(string) {
   }
   return false;
 }
-
-async function canFetch(string) {
-  return await fetch(string)
-    .then((res) => res.status)
-    .then((status) => {
-      if (status === 200) {
+async function isUrlReal(url) {
+  return await fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
         return true;
       }
     })
-    .catch((error) => {
+    .catch(() => {
       return false;
     });
 }
