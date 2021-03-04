@@ -11,8 +11,8 @@ router.get("/:id", (req, res) => {
     dataBase.updateRedirects(id);
     res.status(302).redirect(originalUrl);
   } catch (err) {
-    res.status(400);
-    throw new Error(err.message);
+    res.status(400).json({ error: "short url not found" });
+    // throw new Error(err.message);
   }
 });
 
