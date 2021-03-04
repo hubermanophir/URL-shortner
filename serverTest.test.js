@@ -77,7 +77,6 @@ describe("testing GET route statistic", () => {
     expect(response.body.date).toBeDefined;
     expect(response.body.originalUrl).toBeDefined;
     expect(response.body.shortUrlId).toBeDefined;
-    expect(response.body.shortUrlId).toBeDefined;
   });
   it("should return status 400 for invalid short url", async () => {
     const response = await request(app).get(`/api/statistic/1`);
