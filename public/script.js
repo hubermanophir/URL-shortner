@@ -11,7 +11,7 @@ async function postingNewUrl(url) {
     const response = await axios({
       method: "post",
       url: "http://localhost:3000/api/shorturl/",
-      headers: {
+      data: {
         url: url,
       },
     });

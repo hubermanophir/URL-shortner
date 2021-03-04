@@ -17,8 +17,9 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const userUrl = req.headers.url;
+  const userUrl = req.body.url;
   const isRealUrl = await isUrlReal(userUrl);
+  console.log(userUrl);
   if (validator.isURL(userUrl) && includeHttp(userUrl) && isRealUrl) {
     dataBase.createNewUrl(userUrl);
     const shortUrl = dataBase.getShortUrl(userUrl);
