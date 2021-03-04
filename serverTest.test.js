@@ -51,13 +51,15 @@ describe("check post route to /api/shorturl/new", () => {
 });
 
 describe("testing GET route shorted url's ", () => {
-  it("should return 302 status and redirect", async () => {
+  it("should return status 302, redirect and increase redirect count to 1", async () => {
     const shortUrl = database.getShortUrl(
       "https://www.youtube.com/feed/subscriptions"
     );
     const response = await request(app).get(`/api/shorturl/${shortUrl}`);
     expect(response.status).toBe(302);
     expect(response.redirect).toBeTruthy;
+    const redirects = database.getUrls().urlArray[0].redirects;
+    expect(redirects).toBe(1);
   });
   it("should return status 400 and not redirect", async () => {
     const response = await request(app).get(`/api/shorturl/1`);
