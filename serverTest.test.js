@@ -80,4 +80,8 @@ describe("testing GET route statistic", () => {
     expect(response.body.shortUrlId).toBeDefined;
     expect(response.body.shortUrlId).toBeDefined;
   });
+  it("should return status 400", async () => {
+    const response = await request(app).get(`/api/statistic/1`);
+    expect(response.status).toBe(400);
+  });
 });
