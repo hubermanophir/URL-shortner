@@ -11,8 +11,12 @@ if (process.env.NODE_ENV === "test") {
 
 class DataBase {
   constructor() {
-    const data = fs.readFileSync(`./data/${path}.json`);
-    this.urlObject = JSON.parse(data);
+    try {
+      const data = fs.readFileSync(`./data/${path}.json`);
+      this.urlObject = JSON.parse(data);
+    } catch (err) {
+      throw new Error(err);
+    }
   }
   createNewUrl(originalUrl) {
     for (const item of this.urlObject.urlArray) {

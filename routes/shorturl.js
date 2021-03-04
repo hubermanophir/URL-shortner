@@ -18,16 +18,15 @@ router.get("/:id", (req, res) => {
 
 router.post("/", async (req, res) => {
   const userUrl = req.body.url;
-  const isRealUrl = await isUrlReal(userUrl);
   console.log(userUrl);
+  const isRealUrl = await isUrlReal(userUrl);
   if (validator.isURL(userUrl) && includeHttp(userUrl) && isRealUrl) {
     dataBase.createNewUrl(userUrl);
     const shortUrl = dataBase.getShortUrl(userUrl);
     return res.status(200).json(shortUrl);
   } else if (!includeHttp(userUrl)) {
     res.status(400).json({ error: "invalid url" });
-  }
-  {
+  } else {
     res.status(400).json({ error: "invalid hostname" });
   }
 });
