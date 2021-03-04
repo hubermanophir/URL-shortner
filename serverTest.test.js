@@ -28,10 +28,10 @@ describe("check post route to /api/shorturl/", () => {
     const response = await request(app)
       .post("/api/shorturl/")
       .send({ url: "https://www.youtube.com/feed/subscriptions" });
+    const shortUrl = response.body;
+    const originalUrl = database.getOriginalUrl(shortUrl);
     expect(response.status).toBe(200);
-    expect(response.request["_data"].url).toBe(
-      "https://www.youtube.com/feed/subscriptions"
-    );
+    expect(originalUrl).toBe("https://www.youtube.com/feed/subscriptions");
     expect(response.body["short_url"]).toBeDefined;
   });
   it("should be saved in the database", async () => {
