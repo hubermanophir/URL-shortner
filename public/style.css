@@ -9,13 +9,15 @@ body {
 
 main {
   padding: 0;
-  margin-top: 40px;
+  margin-top: 150px;
 }
 
 form {
+  position: relative;
   margin: 10px auto;
   padding: 20px;
   max-width: 600px;
+  top: 50px;
 }
 
 label {
@@ -37,4 +39,7 @@ input[type="text"] {
   bottom: 20px;
   margin: auto;
   width: 100%;
+}
+#main-title {
+  margin-top: 50px;
 }

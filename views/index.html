@@ -2,6 +2,17 @@
 
 <html>
   <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
     <title>URL Shortener</title>
     <link rel="icon" type="image/png" href="../public/favicon.ico" />
     <link href="./public/style.css" rel="stylesheet" type="text/css" />
@@ -9,17 +20,17 @@
   </head>
 
   <body>
-    <h1>URL Shortener Microservice</h1>
+    <h1 id="main-title">URL Shortener</h1>
     <main>
       <section>
-        <form action="/api/shorturl/" method="POST">
+        <form id="form" action="/api/shorturl/" method="POST">
           <input
             id="url_input"
             type="text"
             name="url"
             placeholder="https://www.freecodecamp.org/"
           />
-          <input id="submit" type="submit" value="Get short URL" />
+          <input id="submit" type="submit" value="Short url" />
         </form>
       </section>
     </main>
