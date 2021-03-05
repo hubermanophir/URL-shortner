@@ -7,52 +7,22 @@
             "redirects": 12
         },
         {
-            "date": "2021-03-04 17:41:28",
+            "date": "2021-03-05 12:31:20",
             "originalUrl": "https://www.wildguitars.co.il/",
-            "shortUrlId": "1tfpe",
-            "redirects": 1
+            "shortUrlId": "cfnlm",
+            "redirects": 5
         },
         {
-            "date": "2021-03-04 17:51:34",
+            "date": "2021-03-05 12:58:42",
             "originalUrl": "https://www.freecodecamp.org",
-            "shortUrlId": "o7c90",
+            "shortUrlId": "qn3aj",
             "redirects": 0
         },
         {
-            "date": "2021-03-05 08:31:20",
-            "originalUrl": "https://github.com/",
-            "shortUrlId": "fmao0",
-            "redirects": 0
-        },
-        {
-            "date": "2021-03-05 09:06:45",
-            "originalUrl": "https://www.npmjs.com/package/axios",
-            "shortUrlId": "t73uw",
-            "redirects": 0
-        },
-        {
-            "date": "2021-03-05 09:07:49",
-            "originalUrl": "https://web.whatsapp.com/",
-            "shortUrlId": "vxu05",
+            "date": "2021-03-05 16:16:12",
+            "originalUrl": "https://stackoverflow.com/questions/32126003/node-js-document-is-not-defined",
+            "shortUrlId": "sgaj0",
             "redirects": 1
-        },
-        {
-            "date": "2021-03-05 10:21:00",
-            "originalUrl": "https://twitter.com/home",
-            "shortUrlId": "7nlfb",
-            "redirects": 0
-        },
-        {
-            "date": "2021-03-05 10:21:51",
-            "originalUrl": "https://www.w3schools.com/cssref/default.asp",
-            "shortUrlId": "otm7r",
-            "redirects": 1
-        },
-        {
-            "date": "2021-03-05 10:51:33",
-            "originalUrl": "https://open.spotify.com/",
-            "shortUrlId": "0gro3",
-            "redirects": 0
         }
     ]
 }
