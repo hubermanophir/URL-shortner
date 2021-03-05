@@ -1,6 +1,6 @@
 // const { default: axios } = require("axios");
 
-const { default: axios } = require("axios");
+// const { default: axios } = require("axios");
 
 const submitBtn = document.getElementById("submit");
 const userUrl = document.getElementById("url_input");
@@ -28,8 +28,6 @@ submitBtn.addEventListener("click", async (e) => {
     await postingNewUrl(value);
   }
 });
-
-listItems.addEventListener("mouseover", (e) => {});
 
 async function postingNewUrl(url) {
   try {
@@ -63,7 +61,6 @@ async function getAllUrl() {
   const response = await axios
     .get(`http://localhost:3000/api/shorturl/`)
     .then((res) => {
-      console.log(res.data);
       urlArrayToList(res.data);
     });
 }
@@ -80,20 +77,26 @@ function makeShortUrlDiv(shortUrl) {
   shortUrlContainer.appendChild(div);
 }
 
-function urlArrayToList(urlArray) {
+async function urlArrayToList(urlArray) {
   const ul = document.createElement("ul");
   for (const url of urlArray) {
     const li = document.createElement("li");
     li.innerHTML = `<a target="_blank" href ="http://localhost:3000/api/shorturl/${url.shortUrlId}" >http://localhost:3000/api/shorturl/${url.shortUrlId}</a>`;
     ul.appendChild(li);
+    await makeFormWithSubmitToStatistics(url.shortUrlId);
   }
   allShortLinks.appendChild(ul);
 }
 
 async function makeFormWithSubmitToStatistics(shortUrl) {
   const form = document.createElement("form");
-  const submit = document.createElement("submit");
-  const response = await axios.get(
-    `http://localhost:3000/api/statistic/${shortUrl}`
-  );
+  form.setAttribute("action", "GET");
+  const submit = document.createElement("input");
+  submit.setAttribute("type", "submit");
+  submit.setAttribute("value", "statistics");
+  const response = await axios
+    .get(`http://localhost:3000/api/statistic/${shortUrl}`)
+    .then((res) => {
+      console.log(res.data);
+    });
 }
