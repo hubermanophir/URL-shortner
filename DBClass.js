@@ -24,6 +24,14 @@ class DataBase {
         const json = res.data.record;
         this.urlObject = json;
       });
+      if (process.env.NODE_ENV === "test") {
+        try {
+          const data = fs.readFileSync(`./data/${path}.json`);
+          this.urlObject = JSON.parse(data);
+        } catch (err) {
+          throw new Error(err);
+        }
+      }
     } catch (err) {
       try {
         const data = fs.readFileSync(`./data/${path}.json`);

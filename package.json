@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --verbose",
     "serverTest": "jest serverTest.test.js --verbose",
+    "newTest": "jest newServerTests.test.js --verbose",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
