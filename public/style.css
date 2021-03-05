@@ -43,3 +43,9 @@ input[type="text"] {
 #main-title {
   margin-top: 50px;
 }
+li {
+  list-style: none;
+}
+ul {
+  padding-left: 0;
+}

@@ -15,6 +15,15 @@ router.get("/:id", (req, res) => {
   }
 });
 
+router.get("/", (req, res) => {
+  try {
+    const { urlArray } = dataBase.getUrls();
+    res.status(200).json(urlArray);
+  } catch (err) {
+    res.status(400).json({ error: "could not find url list" });
+  }
+});
+
 router.post("/", async (req, res) => {
   const userUrl = req.body.url;
   const isRealUrl = await isUrlReal(userUrl);
