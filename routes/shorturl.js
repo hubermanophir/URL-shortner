@@ -12,7 +12,6 @@ router.get("/:id", (req, res) => {
     res.status(302).redirect(originalUrl);
   } catch (err) {
     res.status(400).json({ error: "short url not found" });
-    // throw new Error(err.message);
   }
 });
 
@@ -24,7 +23,6 @@ router.post("/", async (req, res) => {
     const shortUrl = dataBase.getShortUrl(userUrl);
     const { urlArray } = dataBase.getUrls();
     const url = urlArray.filter((value) => value.originalUrl === userUrl);
-    // console.log(url[0]);
     return res.status(200).json(url[0]);
   } else if (!includeHttp(userUrl)) {
     res.status(400).json({ error: "invalid url" });

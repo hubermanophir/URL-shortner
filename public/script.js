@@ -2,13 +2,21 @@ const submitBtn = document.getElementById("submit");
 const userUrl = document.getElementById("url_input");
 const shortUrlContainer = document.getElementById("short-url-container");
 const allShortLinks = document.getElementById("all-short-link");
+const customAlertContainer = document.getElementById("custom-alert-container");
 submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   const value = userUrl.value;
-  if (shortUrlContainer.childNodes.length !== 0) {
-    shortUrlContainer.lastChild.remove();
+  if (value === "") {
+    customAlertContainer.innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Oops!</strong>  Please make sure input field is not empty
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`;
+  } else {
+    if (shortUrlContainer.childNodes.length !== 0) {
+      shortUrlContainer.lastChild.remove();
+    }
+    await postingNewUrl(value);
   }
-  await postingNewUrl(value);
 });
 
 async function postingNewUrl(url) {
@@ -20,10 +28,22 @@ async function postingNewUrl(url) {
         url: url,
       },
     });
-    console.log(response.data.shortUrlId);
     makeShortUrlDiv(response.data.shortUrlId);
   } catch (err) {
-    throw err.response.data.error;
+    if (err.response.data.error === `invalid url`) {
+      customAlertContainer.innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Oops!</strong>  Please make sure you have entered a valid url address
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`;
+      console.log(err.response.data.error);
+      throw err.response.data.error;
+    } else {
+      customAlertContainer.innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Oops!</strong>  website doe's not exist please make sure the address is correct
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`;
+      throw err.response.data.error;
+    }
   }
 }
 
