@@ -24,6 +24,15 @@ class DataBase {
         const json = res.data.record;
         this.urlObject = json;
       });
+      fs.writeFile(
+        `./data/${path}.json`,
+        JSON.stringify(this.urlObject, null, 4),
+        (err) => {
+          if (err) {
+            throw new Error("Cant find file:" + err);
+          }
+        }
+      );
       if (process.env.NODE_ENV === "test") {
         try {
           const data = fs.readFileSync(`./data/${path}.json`);
