@@ -25,7 +25,7 @@ class DataBase {
         this.urlObject = json;
       });
       fs.writeFile(
-        `./data/${path}.json`,
+        `./data/urlJson.json`,
         JSON.stringify(this.urlObject, null, 4),
         (err) => {
           if (err) {
@@ -35,7 +35,7 @@ class DataBase {
       );
       if (process.env.NODE_ENV === "test") {
         try {
-          const data = fs.readFileSync(`./data/${path}.json`);
+          const data = fs.readFileSync(`./data/test.json`);
           this.urlObject = JSON.parse(data);
         } catch (err) {
           throw new Error(err);
