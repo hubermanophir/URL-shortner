@@ -1,6 +1,5 @@
 const { default: axios } = require("axios");
 const fs = require("fs");
-const jsonBinId = `6041eedb81087a6a8b96a651`;
 
 let path;
 if (process.env.NODE_ENV === "test") {
@@ -12,13 +11,9 @@ if (process.env.NODE_ENV === "test") {
 class DataBase {
   constructor() {
     try {
-      axios
-        .get(`https://api.jsonbin.io/v3/b/${jsonBinId}/latest`)
-        .then((res) => {
-          const json = res.data.record;
-          this.urlObject = json;
-          console.log(this.urlObject);
-        });
+      const data = fs.readFileSync(`./data/${path}.json`);
+      this.urlObject = JSON.parse(data);
+      console.log(this.urlObject);
     } catch (err) {
       throw new Error(err);
     }
@@ -35,19 +30,15 @@ class DataBase {
     url.shortUrlId = createRandomSequence();
     url.redirects = 0;
     this.urlObject.urlArray.push(url);
-    try {
-      axios.put(
-        `https://api.jsonbin.io/v3/b/${jsonBinId}`,
-        JSON.stringify(this.urlObject, null, 4),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+    fs.writeFile(
+      `./data/${path}.json`,
+      JSON.stringify(this.urlObject, null, 4),
+      (err) => {
+        if (err) {
+          throw new Error("Cant find file:" + err);
         }
-      );
-    } catch (err) {
-      throw new Error("could not update json" + err);
-    }
+      }
+    );
     return url;
   }
   getUrls() {
@@ -58,19 +49,15 @@ class DataBase {
       return url.shortUrlId === shortUrlId;
     });
     this.urlObject.urlArray[index].redirects += 1;
-    try {
-      axios.put(
-        `https://api.jsonbin.io/v3/b/${jsonBinId}`,
-        JSON.stringify(this.urlObject, null, 4),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+    fs.writeFile(
+      `./data/${path}.json`,
+      JSON.stringify(this.urlObject, null, 4),
+      (err) => {
+        if (err) {
+          throw new Error(err);
         }
-      );
-    } catch (err) {
-      throw new Error("could not update json" + err);
-    }
+      }
+    );
   }
   getOriginalUrl(shortUrlId) {
     const url = this.urlObject.urlArray.filter((url) => {
