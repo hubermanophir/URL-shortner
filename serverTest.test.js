@@ -27,11 +27,11 @@ describe("check post route to /api/shorturl/", () => {
     const response = await request(app)
       .post("/api/shorturl/")
       .send({ url: "https://www.youtube.com/feed/subscriptions" });
-    const shortUrl = response.body;
-    const originalUrl = database.getOriginalUrl(shortUrl);
+    const url = response.body;
+    const originalUrl = url.originalUrl;
     expect(response.status).toBe(200);
     expect(originalUrl).toBe("https://www.youtube.com/feed/subscriptions");
-    expect(response.body["short_url"]).toBeDefined;
+    expect(response.body["shortUrlId"]).toBeDefined;
   });
   it("should be saved in the database", async () => {
     const data = fs.readFileSync(`./data/test.json`);

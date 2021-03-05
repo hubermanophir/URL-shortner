@@ -22,7 +22,10 @@ router.post("/", async (req, res) => {
   if (validator.isURL(userUrl) && includeHttp(userUrl) && isRealUrl) {
     dataBase.createNewUrl(userUrl);
     const shortUrl = dataBase.getShortUrl(userUrl);
-    return res.status(200).json(shortUrl);
+    const { urlArray } = dataBase.getUrls();
+    const url = urlArray.filter((value) => value.originalUrl === userUrl);
+    // console.log(url[0]);
+    return res.status(200).json(url[0]);
   } else if (!includeHttp(userUrl)) {
     res.status(400).json({ error: "invalid url" });
   } else {
