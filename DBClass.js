@@ -1,6 +1,14 @@
 const { default: axios } = require("axios");
 const fs = require("fs");
 const jsonBinId = `6041eedb81087a6a8b96a651`;
+const testUrl = `6041f7ad81087a6a8b96aaa8`;
+
+let address;
+if (process.env.NODE_ENV === "test") {
+  address = testUrl;
+} else {
+  address = jsonBinId;
+}
 
 let path;
 if (process.env.NODE_ENV === "test") {
@@ -12,15 +20,17 @@ if (process.env.NODE_ENV === "test") {
 class DataBase {
   constructor() {
     try {
-      axios
-        .get(`https://api.jsonbin.io/v3/b/${jsonBinId}/latest`)
-        .then((res) => {
-          const json = res.data.record;
-          this.urlObject = json;
-          console.log(this.urlObject);
-        });
+      axios.get(`https://api.jsonbin.io/v3/b/${address}/latest`).then((res) => {
+        const json = res.data.record;
+        this.urlObject = json;
+      });
     } catch (err) {
-      throw new Error(err);
+      try {
+        const data = fs.readFileSync(`./data/${path}.json`);
+        this.urlObject = JSON.parse(data);
+      } catch (err) {
+        throw new Error(err);
+      }
     }
   }
   createNewUrl(originalUrl) {
@@ -37,7 +47,7 @@ class DataBase {
     this.urlObject.urlArray.push(url);
     try {
       axios.put(
-        `https://api.jsonbin.io/v3/b/${jsonBinId}`,
+        `https://api.jsonbin.io/v3/b/${address}`,
         JSON.stringify(this.urlObject, null, 4),
         {
           headers: {
@@ -45,7 +55,25 @@ class DataBase {
           },
         }
       );
+      fs.writeFile(
+        `./data/${path}.json`,
+        JSON.stringify(this.urlObject, null, 4),
+        (err) => {
+          if (err) {
+            throw new Error("Cant find file:" + err);
+          }
+        }
+      );
     } catch (err) {
+      fs.writeFile(
+        `./data/${path}.json`,
+        JSON.stringify(this.urlObject, null, 4),
+        (err) => {
+          if (err) {
+            throw new Error("Cant find file:" + err);
+          }
+        }
+      );
       throw new Error("could not update json" + err);
     }
     return url;
@@ -60,7 +88,7 @@ class DataBase {
     this.urlObject.urlArray[index].redirects += 1;
     try {
       axios.put(
-        `https://api.jsonbin.io/v3/b/${jsonBinId}`,
+        `https://api.jsonbin.io/v3/b/${address}`,
         JSON.stringify(this.urlObject, null, 4),
         {
           headers: {
@@ -68,7 +96,25 @@ class DataBase {
           },
         }
       );
+      fs.writeFile(
+        `./data/${path}.json`,
+        JSON.stringify(this.urlObject, null, 4),
+        (err) => {
+          if (err) {
+            throw new Error(err);
+          }
+        }
+      );
     } catch (err) {
+      fs.writeFile(
+        `./data/${path}.json`,
+        JSON.stringify(this.urlObject, null, 4),
+        (err) => {
+          if (err) {
+            throw new Error(err);
+          }
+        }
+      );
       throw new Error("could not update json" + err);
     }
   }

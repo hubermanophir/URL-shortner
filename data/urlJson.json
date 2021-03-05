@@ -23,6 +23,30 @@
             "originalUrl": "https://github.com/",
             "shortUrlId": "fmao0",
             "redirects": 0
+        },
+        {
+            "date": "2021-03-05 09:06:45",
+            "originalUrl": "https://www.npmjs.com/package/axios",
+            "shortUrlId": "t73uw",
+            "redirects": 0
+        },
+        {
+            "date": "2021-03-05 09:07:49",
+            "originalUrl": "https://web.whatsapp.com/",
+            "shortUrlId": "vxu05",
+            "redirects": 1
+        },
+        {
+            "date": "2021-03-05 10:21:00",
+            "originalUrl": "https://twitter.com/home",
+            "shortUrlId": "7nlfb",
+            "redirects": 0
+        },
+        {
+            "date": "2021-03-05 10:21:51",
+            "originalUrl": "https://www.w3schools.com/cssref/default.asp",
+            "shortUrlId": "otm7r",
+            "redirects": 1
         }
     ]
 }
