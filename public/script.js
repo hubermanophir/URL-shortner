@@ -9,6 +9,9 @@ const moreInfoButton = document.getElementById("more-info");
 const moreInfoInput = document.getElementById("more-info-input");
 const moreInfoContainer = document.getElementById("more-info-container");
 
+//-----------------------------------events----------------------------------------------
+
+//when loading the page the getAllUrl function is called
 document.addEventListener("DOMContentLoaded", async (e) => {
   await getAllUrl();
   for (let i = 0; i < acc.length; i++) {
@@ -24,6 +27,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   }
 });
 
+//event for clicking the new short url button
 submitBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   const value = userUrl.value;
@@ -40,6 +44,7 @@ submitBtn.addEventListener("click", async (e) => {
   }
 });
 
+//event for clicking the more info button
 moreInfoButton.addEventListener("click", async (e) => {
   if (moreInfoContainer.childNodes.length === 0) {
     const shortUrl = moreInfoInput.value;
@@ -48,6 +53,7 @@ moreInfoButton.addEventListener("click", async (e) => {
   }
 });
 
+//event for closing the more info div
 document.addEventListener("click", (e) => {
   if (e.target.id === "ok-button") {
     moreInfoContainer.lastChild.remove();
@@ -55,6 +61,9 @@ document.addEventListener("click", (e) => {
   }
 });
 
+//--------------------------------------------functions---------------------------------------------------------
+
+//gets a specific statistic of a short url
 async function getStatistic(shortUrl) {
   try {
     const response = axios
@@ -69,6 +78,7 @@ async function getStatistic(shortUrl) {
   }
 }
 
+//creating a new short url link
 async function postingNewUrl(url) {
   try {
     const response = await axios({
@@ -97,6 +107,7 @@ async function postingNewUrl(url) {
   }
 }
 
+//getting all urls that are in the storage
 async function getAllUrl() {
   const response = await axios
     .get(`http://localhost:3000/api/shorturl/`)
@@ -105,6 +116,7 @@ async function getAllUrl() {
     });
 }
 
+//getting a short url and creating a div to present the user
 function makeShortUrlDiv(shortUrl) {
   const div = document.createElement("div");
   div.setAttribute("id", "short-url");
@@ -117,6 +129,7 @@ function makeShortUrlDiv(shortUrl) {
   shortUrlContainer.appendChild(div);
 }
 
+//getting the array of urls and making a list of divs
 function urlArrayToList(urlArray) {
   for (const url of urlArray) {
     const button = document.createElement("button");
@@ -133,6 +146,7 @@ function urlArrayToList(urlArray) {
   }
 }
 
+//making the more info div
 function createInfoDiv(data) {
   const div = document.createElement("div");
   const button = document.createElement("button");
