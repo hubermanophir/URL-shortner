@@ -1,17 +1,24 @@
-// const { default: axios } = require("axios");
-
-// const { default: axios } = require("axios");
-
 const submitBtn = document.getElementById("submit");
 const userUrl = document.getElementById("url_input");
 const shortUrlContainer = document.getElementById("short-url-container");
 const allShortLinks = document.getElementById("all-short-link");
 const customAlertContainer = document.getElementById("custom-alert-container");
 const listItems = document.getElementsByTagName("li");
-const accordionDiv = document.getElementById("accordion");
+const acc = document.getElementsByClassName("accordion");
 
 document.addEventListener("DOMContentLoaded", async (e) => {
   await getAllUrl();
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      let panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  }
 });
 
 submitBtn.addEventListener("click", async (e) => {
@@ -79,17 +86,19 @@ function makeShortUrlDiv(shortUrl) {
   shortUrlContainer.appendChild(div);
 }
 
-async function urlArrayToList(urlArray) {
-  const ul = document.createElement("ul");
+function urlArrayToList(urlArray) {
   for (const url of urlArray) {
-    const li = document.createElement("li");
-    li.setAttribute("class", "short-url-li");
-    li.innerHTML = `<a target="_blank" href ="http://localhost:3000/api/shorturl/${url.shortUrlId}" >http://localhost:3000/api/shorturl/${url.shortUrlId}</a>`;
-    const form = await makeFormWithSubmitToStatistics(url.shortUrlId);
-    li.appendChild(form);
-    ul.appendChild(li);
+    const button = document.createElement("button");
+    button.setAttribute("class", "accordion");
+    button.innerText = `http://localhost:3000/api/shorturl/${url.shortUrlId}`;
+    const div = document.createElement("div");
+    div.setAttribute("class", "panel");
+    const p = document.createElement("p");
+    p.innerHTML = `Short url address: <a target="blank" href="http://localhost:3000/api/shorturl/${url.shortUrlId}">http://localhost:3000/api/shorturl/${url.shortUrlId}</a><br>Original address: ${url.originalUrl}<br>Number of redirects:${url.redirects}<br>Creation date:${url.date}`;
+    div.appendChild(p);
+    allShortLinks.appendChild(button);
+    allShortLinks.appendChild(div);
   }
-  allShortLinks.appendChild(ul);
 }
 
 async function makeFormWithSubmitToStatistics(shortUrlId) {
