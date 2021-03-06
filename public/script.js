@@ -125,7 +125,7 @@ function urlArrayToList(urlArray) {
     const div = document.createElement("div");
     div.setAttribute("class", "panel");
     const p = document.createElement("p");
-    p.innerHTML = `Short url address: <a target="blank" href="http://localhost:3000/api/shorturl/${url.shortUrlId}">http://localhost:3000/api/shorturl/${url.shortUrlId}</a><br>Original address: ${url.originalUrl}<br>Number of redirects:${url.redirects}<br>Creation date:${url.date}`;
+    p.innerHTML = `Short url address: <a target="blank" href="http://localhost:3000/api/shorturl/${url.shortUrlId}">http://localhost:3000/api/shorturl/${url.shortUrlId}</a><br>Original address: ${url.originalUrl}<br>Number of redirects: ${url.redirects}<br>Creation date: ${url.date}`;
     p.setAttribute("class", "info");
     div.appendChild(p);
     allShortLinks.appendChild(button);
