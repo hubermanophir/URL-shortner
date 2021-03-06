@@ -61,6 +61,7 @@ async function getAllUrl() {
   const response = await axios
     .get(`http://localhost:3000/api/shorturl/`)
     .then((res) => {
+      console.log(res.data);
       urlArrayToList(res.data);
     });
 }
@@ -81,22 +82,25 @@ async function urlArrayToList(urlArray) {
   const ul = document.createElement("ul");
   for (const url of urlArray) {
     const li = document.createElement("li");
+    li.setAttribute("class", "short-url-li");
     li.innerHTML = `<a target="_blank" href ="http://localhost:3000/api/shorturl/${url.shortUrlId}" >http://localhost:3000/api/shorturl/${url.shortUrlId}</a>`;
+    const form = await makeFormWithSubmitToStatistics(url.shortUrlId);
+    li.appendChild(form);
     ul.appendChild(li);
-    await makeFormWithSubmitToStatistics(url.shortUrlId);
   }
   allShortLinks.appendChild(ul);
 }
 
-async function makeFormWithSubmitToStatistics(shortUrl) {
+async function makeFormWithSubmitToStatistics(shortUrlId) {
   const form = document.createElement("form");
-  form.setAttribute("action", "GET");
+  form.setAttribute("method", "GET");
+  form.setAttribute("action", `/api/statistic/${shortUrlId}`);
+  form.setAttribute("class", "statistic-form");
+  form.setAttribute("target", "_blank");
   const submit = document.createElement("input");
   submit.setAttribute("type", "submit");
-  submit.setAttribute("value", "statistics");
-  const response = await axios
-    .get(`http://localhost:3000/api/statistic/${shortUrl}`)
-    .then((res) => {
-      console.log(res.data);
-    });
+  submit.setAttribute("value", "statistics >");
+  submit.setAttribute("class", "statistics-button");
+  form.appendChild(submit);
+  return form;
 }
