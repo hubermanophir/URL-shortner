@@ -14,7 +14,7 @@ main {
   margin: auto;
   margin-top: 15vh;
   background-color: white;
-  min-height: 15vh;
+  min-height: 22vh;
   width: 65vw;
 }
 @media only screen and (max-device-width: 800px) {
@@ -122,7 +122,7 @@ ul {
   padding: 18px;
   width: 100%;
   border: none;
-  text-align: left;
+  text-align: center;
   outline: none;
   font-size: 15px;
   transition: 0.4s;
@@ -139,4 +139,50 @@ ul {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+}
+#all-short-url-btn {
+  position: relative;
+  top: 10px;
+}
+#more-info {
+  height: 2em;
+  font-size: 1.3em;
+  background-color: #0d6efd;
+  color: white;
+  border-width: 0px;
+  border-radius: 5px;
+  transition: 0.3s;
+  &:hover {
+    background-color: #0a4fb6;
+  }
+}
+#more-info-input {
+  width: fit-content;
+  height: 2.5em;
+}
+#more-info-container {
+  background-color: black;
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  opacity: 90%;
+}
+
+#ok-button {
+  height: 2em;
+  width: 2.5em;
+  background-color: #0d6efd;
+  color: white;
+  border-width: 0px;
+  border-radius: 5px;
+  transition: 0.3s;
+  &:hover {
+    background-color: #0a4fb6;
+  }
 }

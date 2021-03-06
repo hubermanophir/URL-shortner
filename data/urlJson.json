@@ -1,40 +1,34 @@
 {
-    "urlArray": [
-        {
-            "date": "2021-03-02 15:57:34",
-            "originalUrl": "https://www.google.co.il/",
-            "shortUrlId": "3p5ek",
-            "redirects": 17
-        },
-        {
-            "date": "2021-03-05 12:31:20",
-            "originalUrl": "https://www.wildguitars.co.il/",
-            "shortUrlId": "cfnlm",
-            "redirects": 7
-        },
-        {
-            "date": "2021-03-05 12:58:42",
-            "originalUrl": "https://www.freecodecamp.org",
-            "shortUrlId": "qn3aj",
-            "redirects": 1
-        },
-        {
-            "date": "2021-03-05 16:16:12",
-            "originalUrl": "https://stackoverflow.com/questions/32126003/node-js-document-is-not-defined",
-            "shortUrlId": "sgaj0",
-            "redirects": 1
-        },
-        {
-            "date": "2021-03-05 18:09:11",
-            "originalUrl": "https://jsonbin.io/dashboard",
-            "shortUrlId": "fke3j",
-            "redirects": 1
-        },
-        {
-            "date": "2021-03-06 12:15:25",
-            "originalUrl": "https://open.spotify.com/",
-            "shortUrlId": "3a19g",
-            "redirects": 0
-        }
-    ]
+  "urlArray": [
+    {
+      "date": "2021-03-02 15:57:34",
+      "originalUrl": "https://www.google.co.il/",
+      "shortUrlId": "3p5ek",
+      "redirects": 18
+    },
+    {
+      "date": "2021-03-05 12:31:20",
+      "originalUrl": "https://www.wildguitars.co.il/",
+      "shortUrlId": "cfnlm",
+      "redirects": 7
+    },
+    {
+      "date": "2021-03-05 12:58:42",
+      "originalUrl": "https://www.freecodecamp.org",
+      "shortUrlId": "qn3aj",
+      "redirects": 2
+    },
+    {
+      "date": "2021-03-05 18:09:11",
+      "originalUrl": "https://jsonbin.io/dashboard",
+      "shortUrlId": "fke3j",
+      "redirects": 1
+    },
+    {
+      "date": "2021-03-06 12:15:25",
+      "originalUrl": "https://open.spotify.com/",
+      "shortUrlId": "3a19g",
+      "redirects": 0
+    }
+  ]
 }

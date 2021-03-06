@@ -5,6 +5,9 @@ const allShortLinks = document.getElementById("all-short-link");
 const customAlertContainer = document.getElementById("custom-alert-container");
 const listItems = document.getElementsByTagName("li");
 const acc = document.getElementsByClassName("accordion");
+const moreInfoButton = document.getElementById("more-info");
+const moreInfoInput = document.getElementById("more-info-input");
+const moreInfoContainer = document.getElementById("more-info-container");
 
 document.addEventListener("DOMContentLoaded", async (e) => {
   await getAllUrl();
@@ -36,6 +39,35 @@ submitBtn.addEventListener("click", async (e) => {
     await postingNewUrl(value);
   }
 });
+
+moreInfoButton.addEventListener("click", async (e) => {
+  if (moreInfoContainer.childNodes.length === 0) {
+    const shortUrl = moreInfoInput.value;
+    console.log(shortUrl);
+    await getStatistic(shortUrl);
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target.id === "ok-button") {
+    moreInfoContainer.lastChild.remove();
+    moreInfoContainer.hidden = true;
+  }
+});
+
+async function getStatistic(shortUrl) {
+  try {
+    const response = axios
+      .get(`http://localhost:3000/api/statistic/${shortUrl}`)
+      .then((res) => {
+        moreInfoContainer.hidden = false;
+        createInfoDiv(res.data);
+      });
+  } catch (err) {
+    console.log(err);
+    moreInfoContainer.hidden = true;
+  }
+}
 
 async function postingNewUrl(url) {
   try {
@@ -101,16 +133,12 @@ function urlArrayToList(urlArray) {
   }
 }
 
-async function makeFormWithSubmitToStatistics(shortUrlId) {
-  const form = document.createElement("form");
-  form.setAttribute("method", "GET");
-  form.setAttribute("action", `/api/statistic/${shortUrlId}`);
-  form.setAttribute("class", "statistic-form");
-  form.setAttribute("target", "_blank");
-  const submit = document.createElement("input");
-  submit.setAttribute("type", "submit");
-  submit.setAttribute("value", "statistics >");
-  submit.setAttribute("class", "statistics-button");
-  form.appendChild(submit);
-  return form;
+function createInfoDiv(data) {
+  const div = document.createElement("div");
+  const button = document.createElement("button");
+  button.innerText = "Ok";
+  button.setAttribute("id", "ok-button");
+  div.innerHTML = `Original url:${data.originalUrl}<br>Short url: http://localhost:3000/api/shorturl${data.shortUrlId}<br>Redirects: ${data.redirects}<br>Creation date: ${data.date}<br>`;
+  div.appendChild(button);
+  moreInfoContainer.appendChild(div);
 }
