@@ -10,7 +10,7 @@
             "date": "2021-03-05 12:31:20",
             "originalUrl": "https://www.wildguitars.co.il/",
             "shortUrlId": "cfnlm",
-            "redirects": 6
+            "redirects": 7
         },
         {
             "date": "2021-03-05 12:58:42",
@@ -29,6 +29,12 @@
             "originalUrl": "https://jsonbin.io/dashboard",
             "shortUrlId": "fke3j",
             "redirects": 1
+        },
+        {
+            "date": "2021-03-06 12:15:25",
+            "originalUrl": "https://open.spotify.com/",
+            "shortUrlId": "3a19g",
+            "redirects": 0
         }
     ]
 }

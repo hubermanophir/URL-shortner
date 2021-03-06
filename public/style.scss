@@ -6,14 +6,16 @@ body {
   text-align: center;
   line-height: 1.4em;
 }
-
+header {
+  align-items: center;
+}
 main {
   padding: 0;
-  margin-top: 150px;
-  background-color: white;
-  min-height: 85vh;
-  width: 65vw;
   margin: auto;
+  margin-top: 15vh;
+  background-color: white;
+  min-height: 15vh;
+  width: 65vw;
 }
 @media only screen and (max-device-width: 800px) {
   main {
@@ -72,6 +74,10 @@ input[type="text"] {
   margin-top: 50px;
   font-size: 4em;
   color: white;
+  height: 15vh;
+  text-align: center;
+  margin: auto;
+  padding-top: 6vh;
 }
 li {
   list-style: none;
@@ -83,6 +89,7 @@ li {
 }
 ul {
   padding-left: 0;
+  margin-bottom: 15px;
 }
 .statistic-form {
   display: inline;
@@ -103,4 +110,7 @@ ul {
 #short-url {
   padding-bottom: 50px;
   font-size: 2em;
+}
+#all-short-link {
+  margin-bottom: 15px;
 }
