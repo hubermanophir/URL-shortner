@@ -4,6 +4,7 @@ const router = express.Router();
 const dataBase = require("../DBClass");
 const fetch = require("node-fetch");
 
+//get a specific url
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   try {
@@ -15,6 +16,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
+//get all urls array
 router.get("/", (req, res) => {
   try {
     const { urlArray } = dataBase.getUrls();
@@ -24,6 +26,7 @@ router.get("/", (req, res) => {
   }
 });
 
+//post a new url
 router.post("/", async (req, res) => {
   const userUrl = req.body.url;
   const isRealUrl = await isUrlReal(userUrl);
@@ -40,12 +43,17 @@ router.post("/", async (req, res) => {
   }
 });
 
+//--------------------------------functions----------------------------
+
+//checking if string includes an http or https
 function includeHttp(string) {
   if (/(http(s?)):\/\//i.test(string)) {
     return true;
   }
   return false;
 }
+
+//function that tries to fetch the users address by that its checking if the address is real or not
 async function isUrlReal(url) {
   return await fetch(url)
     .then((res) => {
