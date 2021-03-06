@@ -101,7 +101,6 @@ async function getAllUrl() {
   const response = await axios
     .get(`http://localhost:3000/api/shorturl/`)
     .then((res) => {
-      console.log(res.data);
       urlArrayToList(res.data);
     });
 }
@@ -127,6 +126,7 @@ function urlArrayToList(urlArray) {
     div.setAttribute("class", "panel");
     const p = document.createElement("p");
     p.innerHTML = `Short url address: <a target="blank" href="http://localhost:3000/api/shorturl/${url.shortUrlId}">http://localhost:3000/api/shorturl/${url.shortUrlId}</a><br>Original address: ${url.originalUrl}<br>Number of redirects:${url.redirects}<br>Creation date:${url.date}`;
+    p.setAttribute("class", "info");
     div.appendChild(p);
     allShortLinks.appendChild(button);
     allShortLinks.appendChild(div);
@@ -138,6 +138,7 @@ function createInfoDiv(data) {
   const button = document.createElement("button");
   button.innerText = "Ok";
   button.setAttribute("id", "ok-button");
+  div.setAttribute("id", "info-div");
   div.innerHTML = `Original url:${data.originalUrl}<br>Short url: http://localhost:3000/api/shorturl${data.shortUrlId}<br>Redirects: ${data.redirects}<br>Creation date: ${data.date}<br>`;
   div.appendChild(button);
   moreInfoContainer.appendChild(div);
