@@ -4,7 +4,6 @@
 
 ## replit link
 
-https://repl.it/join/uxfrbkwi-hubermanophir
 https://URL-shortner.hubermanophir.repl.co
 
 ## Overview
